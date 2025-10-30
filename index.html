@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria em Perspectiva</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+            overflow: hidden;
+        }
+
+        .galeria {
+            width: 800px;
+            height: 500px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(10deg);
+        }
+
+        .parede {
+            position: absolute;
+            width: 800px;
+            height: 500px;
+            background: #fff;
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        }
+
+        .fundo {
+            transform: translateZ(-400px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .parede.esquerda {
+            transform: rotateY(60deg) translateX(-400px);
+            transform-origin: left;
+        }
+
+        .parede.direita {
+            transform: rotateY(-60deg) translateX(400px);
+            transform-origin: right;
+        }
+
+        .quadro {
+            position: absolute;
+            width: 160px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        /* Posições dos quadros */
+        .esquerda .quadro:nth-child(1) {
+            top: 80px;
+            left: 70px;
+        }
+
+        .esquerda .quadro:nth-child(2) {
+            top: 80px;
+            right: 120px;
+            width: 160px;
+        }
+
+        .esquerda .quadro:nth-child(3) {
+            top: 90px;
+            left: 260px;
+            width: 200px;
+        }
+
+        .esquerda .quadro:nth-child(4) {
+            bottom: 140px;
+            left: 300px;
+        }
+
+
+
+
+
+        
+        .direita .quadro:nth-child(1) {
+            top: 60px;
+            right: 70px;
+        }
+
+        .direita .quadro:nth-child(2) {
+            top: 120px;
+            right: 300px;
+        }
+
+        .direita .quadro:nth-child(3) {
+            top: 200px;
+            right: 500px;
+        }
+
+        /* Quadro central no fundo */
+        .fundo .quadro-central {
+            width: 180px;
+            height: 260px;
+            border-radius: 10px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="galeria">
+        <div class="parede esquerda">
+            <img style="height: 300px;" src="img/ogrito.webp" class="quadro">
+            <img style="height: 300px;"
+                src="img/abapuru.jpg" class="quadro">
+            <img src="img/jesus.webp" class="quadro">
+            <img src="img/noite-estrelada.jpg" class="quadro">
+            
+        </div>
+
+        <div class="parede direita">
+            <img style="height: 400px; width: 200px;" src="img/monalisa.webp"
+                class="quadro">
+            <img style="height: 250px;" src="img/mococa.webp" class="quadro">
+            <img src="img/nascimento-venus.webp" class="quadro">
+
+        </div>
+
+        <div class="parede fundo">
+            <img src="img/skeleton.jpg" class="quadro-central">
+        </div>
+    </div>
+</body>
+
+</html>

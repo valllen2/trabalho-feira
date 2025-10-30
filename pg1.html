@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria de Arte Contemporânea</title>
+    
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <style>
+        /* ======================================= */
+        /* 1. ESTILOS GERAIS E DO WALLPAPER */
+        /* ======================================= */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0; /* Fundo geral para a galeria (após o header) */
+            overflow-x: hidden; 
+            color: #333;
+        }
+
+        /* Removida a div.wallpaper-fundo */
+        
+        /* Estilos do Título Principal (AGORA COM O FUNDO) */
+        .header-content {
+            /* ** NOVO: O fundo da imagem está AQUI, e não fixo ** */
+            background-image: url('Captura\ de\ tela\ 2025-10-30\ 173540.png'); /* **ATENÇÃO: Mude 'wallpaper.jpg' se necessário** */
+            background-size: cover;
+            background-position: center;
+            
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #222;
+            position: relative;
+            z-index: 10;
+            
+            /* Camada de Opacidade/Transparência sobre a imagem de fundo */
+            /* A cor branca fica transparente para deixar a imagem de fundo aparecer */
+            background-color: rgba(255, 255, 255, 0.705); 
+            background-blend-mode: lighten; /* Combina a cor com a imagem para o efeito de transparência */
+        }
+
+        .header-content h1 {
+            font-size: 3.5em;
+            margin-bottom: 0.3em;
+            color: #1a1a1a;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5); /* Sombra clara para o texto */
+        }
+
+        .header-content p {
+            font-size: 1.3em;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+
+        /* ======================================= */
+        /* 2. ESTILOS DO CARD DE ARTE (FLIP CARD 3D) */
+        /* ======================================= */
+
+        .galeria-principal {
+            padding: 50px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5; 
+        }
+        
+        /* Container de cada Item - sem retângulo ao redor da obra */
+        .item-galeria {
+            perspective: 1000px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 180px 0; 
+            min-height: 400px; 
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+        }
+        
+        .quadro-giratorio {
+            width: 300px;
+            height: 400px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1.5s ease-out; 
+            z-index: 20; 
+        }
+
+        .item-galeria.clicado .quadro-giratorio {
+            transform: rotateY(360deg) translateX(-150px); 
+        }
+
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; 
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Sombra de flutuação */
+            border-radius: 5px; 
+            overflow: hidden; 
+        }
+
+        .face img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .painel-descricao {
+            width: 380px; 
+            height: 400px; 
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95); 
+            border-left: 1px solid #ddd;
+            position: absolute;
+            right: 0; 
+            
+            transform: translateX(100%); 
+            opacity: 0;
+            
+            transition: transform 1.2s ease-out 0.5s, opacity 1.2s ease-out 0.5s; 
+            z-index: 10;
+            overflow-y: auto;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1); 
+            color: #333;
+        }
+
+        .painel-descricao h3 {
+            font-size: 1.8em;
+            color: #007bff;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .painel-descricao p {
+            font-size: 1.05em;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .item-galeria.clicado .painel-descricao {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-content">
+        <h1>Galeria de Arte Contemporânea</h1>
+        <p>Explore as obras que desafiam o convencional e redefinem a expressão artística. Role para baixo para uma imersão visual e clique nos quadros para descobrir suas histórias.</p>
+    </div>
+
+    <section class="galeria-principal">
+        
+        
+<div class="item-galeria" data-sr-quadro="1">
+            <div class="quadro-giratorio">
+                <div class="face front">
+                    <img src="img/mococa.webp" alt="Obra: Despertar Abstrato">
+                </div>
+                <div class="face back" style="background-color: #f0f0f0; transform: rotateY(180deg);"></div>
+            </div>
+            
+            <div class="painel-descricao">
+                <h3>Despertar Abstrato</h3>
+                <p>Uma explosão de cores e formas que evoca a complexidade das emoções humanas ao amanhecer. A fluidez da tinta a óleo sobre tela reflete a constante mudança do nosso interior.</p>
+                <p>Artista: Sofia Almeida</p>
+                <p>Ano: 2023</p>
+                <p>Técnica: Óleo sobre tela</p>
+            </div>
+        </div>
+
+        
+<div class="item-galeria" data-sr-quadro="2">
+            <div class="quadro-giratorio">
+                <div class="face front">
+                    <img src="img/mococa.webp" alt="Obra: Conexões Urbanas">
+                </div>
+                <div class="face back" style="background-color: #e0e0e0; transform: rotateY(180deg);"></div>
+            </div>
+            
+            <div class="painel-descricao">
+                <h3>Conexões Urbanas</h3>
+                <p>Esta obra, feita com colagens e acrílico, captura a intersecção de vidas e estruturas na metrópole. Cada fragmento representa um encontro, uma história, um pulso da cidade.</p>
+                <p>Artista: Lucas Costa</p>
+                <p>Ano: 2022</p>
+                <p>Técnica: Colagem e Acrílico</p>
+            </div>
+        </div>
+        
+        
+<div class="item-galeria" data-sr-quadro="3">
+            <div class="quadro-giratorio">
+                <div class="face front">
+                    <img src="img/abapuru.jpg" alt="Obra: Silêncio da Natureza">
+                </div>
+                <div class="face back" style="background-color: #d0d0d0; transform: rotateY(180deg);"></div>
+            </div>
+            
+            <div class="painel-descricao">
+                <h3>Silêncio da Natureza</h3>
+                <p>Uma representação serena da força e calma da natureza. A paleta de cores terrosas e os traços suaves convidam à introspecção e à valorização do ambiente natural.</p>
+                <p>Artista: Helena Pereira</p>
+                <p>Ano: 2024</p>
+                <p>Técnica: Aguarela</p>
+            </div>
+        </div>
+
+        
+<div class="item-galeria" data-sr-quadro="4">
+            <div class="quadro-giratorio">
+                <div class="face front">
+                    <img src="img/abapuru.jpg" alt="Obra: Reflexos Digitais">
+                </div>
+                <div class="face back" style="background-color: #c0c0c0; transform: rotateY(180deg);"></div>
+            </div>
+            
+            <div class="painel-descricao">
+                <h3>Reflexos Digitais</h3>
+                <p>A arte encontra a tecnologia nesta peça digital que explora a dualidade entre o mundo virtual e o real. Linhas e pixels se entrelaçam em uma dança moderna e futurista.</p>
+                <p>Artista: Gabriel Santos</p>
+                <p>Ano: 2023</p>
+                <p>Técnica: Arte Digital, Impressão Fine Art</p>
+            </div>
+        </div>
+
+        
+<div class="item-galeria" data-sr-quadro="5">
+            <div class="quadro-giratorio">
+                <div class="face front">
+                    <img src="img/skeleton.jpg" alt="Obra: A Dança do Fogo">
+                </div>
+                <div class="face back" style="background-color: #b0b0b0; transform: rotateY(180deg);"></div>
+            </div>
+            
+            <div class="painel-descricao">
+                <h3>A Dança do Fogo</h3>
+                <p>Usando técnicas mistas com pigmentos naturais, esta obra representa a energia primal e a capacidade de transformação. As chamas se movem, mas a essência permanece.</p>
+                <p>Artista: Mariana Lopes</p>
+                <p>Ano: 2024</p>
+                <p>Técnica: Mista com Pigmentos</p>
+            </div>
+        </div>
+
+        
+<div class="item-galeria" data-sr-quadro="6">
+            <div class="quadro-giratorio">
+                <div class="face front">
+                    <img src="img/skeleton.jpg" alt="Obra: Memórias Fragmentadas">
+                </div>
+                <div class="face back" style="background-color: #a0a0a0; transform: rotateY(180deg);"></div>
+            </div>
+            
+            <div class="painel-descricao">
+                <h3>Memórias Fragmentadas</h3>
+                <p>Um mosaico de lembranças e sonhos, esta obra de cerâmica e vidro retrata como as experiências se moldam e se redefinem ao longo do tempo. Cada fragmento conta uma parte da história.</p>
+                <p>Artista: Pedro Ribeiro</p>
+                <p>Ano: 2022</p>
+                <p>Técnica: Mosaico em Cerâmica e Vidro</p>
+            </div>
+        </div>
+
+        
+<div class="item-galeria" data-sr-quadro="7">
+            <div class="quadro-giratorio">
+                <div class="face front">
+                    <img src="img/ogrito.webp" alt="Obra: Horizonte Infinito">
+                </div>
+                <div class="face back" style="background-color: #909090; transform: rotateY(180deg);"></div>
+            </div>
+            
+            <div class="painel-descricao">
+                <h3>Horizonte Infinito</h3>
+                <p>Através da fotografia de paisagem e manipulação digital, o artista nos convida a contemplar a vastidão do mundo e as possibilidades ilimitadas que ele oferece.</p>
+                <p>Artista: Carla Neves</p>
+                <p>Ano: 2023</p>
+                <p>Técnica: Fotografia e Edição Digital</p>
+            </div>
+        </div>
+
+        
+<div class="item-galeria" data-sr-quadro="8">
+            <div class="quadro-giratorio">
+                <div class="face front">
+                    <img src="img/ogrito.webp" alt="Obra: Geometria Viva">
+                </div>
+                <div class="face back" style="background-color: #808080; transform: rotateY(180deg);"></div>
+            </div>
+            
+            <div class="painel-descricao">
+                <h3>Geometria Viva</h3>
+                <p>A simplicidade das formas geométricas ganha vida com cores vibrantes e texturas inesperadas. Esta obra em tela exibe a beleza da ordem e do caos controlados.</p>
+                <p>Artista: Ricardo Pinto</p>
+                <p>Ano: 2024</p>
+                <p>Técnica: Acrílico sobre tela</p>
+            </div>
+        </div>
+
+        
+<div class="item-galeria" data-sr-quadro="9">
+            <div class="quadro-giratorio">
+                <div class="face front">
+                    <img src="img/monalisa.webp" alt="Obra: Eco do Passado">
+                </div>
+                <div class="face back" style="background-color: #707070; transform: rotateY(180deg);"></div>
+            </div>
+            
+            <div class="painel-descricao">
+                <h3>Eco do Passado</h3>
+                <p>Com elementos de arte reciclada, esta instalação explora a memória coletiva e o impacto do tempo. Peças antigas ganham um novo significado em um contexto contemporâneo.</p>
+                <p>Artista: Vera Santos</p>
+                <p>Ano: 2023</p>
+                <p>Técnica: Instalação com Arte Reciclada</p>
+            </div>
+        </div>
+
+        
+<div class="item-galeria" data-sr-quadro="10">
+            <div class="quadro-giratorio">
+                <div class="face front">
+                    <img src="img/monalisa.webp" alt="Obra: Futuro Líquido">
+                </div>
+                <div class="face back" style="background-color: #606060; transform: rotateY(180deg);"></div>
+            </div>
+            
+            <div class="painel-descricao">
+                <h3>Futuro Líquido</h3>
+                <p>Pintura em resina com pigmentos reativos que se transformam com a luz. A obra simboliza a fluidez da sociedade moderna e a constante busca por identidade em um mundo em mudança.</p>
+                <p>Artista: Diogo Ferreira</p>
+                <p>Ano: 2025</p>
+                <p>Técnica: Resina e Pigmentos Reativos</p>
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // =======================================
+            // A) ANIMAÇÃO AO CLIQUE (GIRO 3D E DESCRIÇÃO)
+            // =======================================
+            document.querySelectorAll('.item-galeria').forEach(item => {
+                item.addEventListener('click', function() {
+                    const isClicked = this.classList.toggle('clicado');
+                    
+                    // Garante que apenas um painel de descrição esteja aberto por vez
+                    document.querySelectorAll('.item-galeria').forEach(otherItem => {
+                        if (otherItem !== this && otherItem.classList.contains('clicado')) {
+                            otherItem.classList.remove('clicado');
+                        }
+                    });
+                });
+            });
+
+            // =======================================
+            // B) ANIMAÇÃO AO ROLAR (SCROLL REVEAL)
+            // =======================================
+            const sr = ScrollReveal({
+                delay: 200,
+                duration: 900,
+                easing: 'cubic-bezier(0.5, 0, 0, 1)',
+                reset: false, 
+            });
+
+            // Aplica a animação: aparecer de baixo e com a sombra de flutuação
+            sr.reveal('.item-galeria', {
+                origin: 'bottom', 
+                distance: '100px', 
+                opacity: 0, 
+                scale: 0.95, 
+            });
+
+            // Faz a primeira seção (header-content) desaparecer suavemente ao rolar
+             sr.reveal('.header-content', {
+                origin: 'top',
+                distance: '0px',
+                opacity: 0,
+                scale: 1,
+                delay: 0,
+                duration: 500,
+                reset: false
+            });
+        });
+    </script>
+</body>
+</html>
